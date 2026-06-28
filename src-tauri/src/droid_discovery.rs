@@ -22,6 +22,8 @@ fn droid_binary_candidates() -> Vec<PathBuf> {
 
 fn droid_binary_candidates_for_home(home: &Path) -> Vec<PathBuf> {
     vec![
+        home.join("bin/droid"),
+        home.join("bin/droid.exe"),
         home.join(".local/bin/droid"),
         home.join(".local/bin/droid.exe"),
         home.join(".factory/bin/droid"),
@@ -82,6 +84,7 @@ mod tests {
         let home = PathBuf::from("C:/Users/alex");
         let candidates = droid_binary_candidates_for_home(&home);
         let expected = [
+            home.join("bin/droid.exe"),
             home.join("AppData/Roaming/npm/droid.cmd"),
             home.join("AppData/Local/pnpm/droid.cmd"),
             home.join("scoop/shims/droid.exe"),
