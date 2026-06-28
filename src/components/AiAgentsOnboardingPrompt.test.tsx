@@ -13,6 +13,7 @@ const missingStatuses: AiAgentsStatus = {
   gemini: { status: 'missing', version: null },
   kiro: { status: 'missing', version: null },
   hermes: { status: 'missing', version: null },
+  droid: { status: 'missing', version: null },
 }
 const installLinkTargets = [
   ['ai-agents-onboarding-install-claude_code', 'https://docs.anthropic.com/en/docs/claude-code'],
@@ -22,6 +23,7 @@ const installLinkTargets = [
   ['ai-agents-onboarding-install-gemini', 'https://google-gemini.github.io/gemini-cli/'],
   ['ai-agents-onboarding-install-kiro', 'https://kiro.dev/docs/cli'],
   ['ai-agents-onboarding-install-hermes', 'https://hermes-agent.nousresearch.com/docs/getting-started/quickstart'],
+  ['ai-agents-onboarding-install-droid', 'https://docs.factory.ai'],
 ] as const
 
 vi.mock('../utils/url', () => ({

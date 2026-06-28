@@ -14,6 +14,7 @@ pub enum AiAgentId {
     Gemini,
     Kiro,
     Hermes,
+    Droid,
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Default)]
@@ -39,6 +40,7 @@ pub struct AiAgentsStatus {
     pub gemini: AiAgentAvailability,
     pub kiro: AiAgentAvailability,
     pub hermes: AiAgentAvailability,
+    pub droid: AiAgentAvailability,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -110,15 +112,17 @@ pub async fn get_ai_agents_status() -> AiAgentsStatus {
     let gemini = tokio::task::spawn_blocking(crate::gemini_cli::check_cli);
     let kiro = tokio::task::spawn_blocking(crate::kiro_cli::check_cli);
     let hermes = tokio::task::spawn_blocking(crate::hermes_cli::check_cli);
+    let droid = tokio::task::spawn_blocking(crate::droid_cli::check_cli);
 
-    let (claude, codex, opencode, pi, gemini, kiro, hermes) = tokio::join!(
+    let (claude, codex, opencode, pi, gemini, kiro, hermes, droid) = tokio::join!(
         availability_or_missing(claude, AI_AGENT_STATUS_PROBE_TIMEOUT),
         availability_or_missing(codex, AI_AGENT_STATUS_PROBE_TIMEOUT),
         availability_or_missing(opencode, AI_AGENT_STATUS_PROBE_TIMEOUT),
         availability_or_missing(pi, AI_AGENT_STATUS_PROBE_TIMEOUT),
         availability_or_missing(gemini, AI_AGENT_STATUS_PROBE_TIMEOUT),
         availability_or_missing(kiro, AI_AGENT_STATUS_PROBE_TIMEOUT),
-        availability_or_missing(hermes, AI_AGENT_STATUS_PROBE_TIMEOUT)
+        availability_or_missing(hermes, AI_AGENT_STATUS_PROBE_TIMEOUT),
+        availability_or_missing(droid, AI_AGENT_STATUS_PROBE_TIMEOUT)
     );
 
     AiAgentsStatus {
@@ -129,6 +133,7 @@ pub async fn get_ai_agents_status() -> AiAgentsStatus {
         gemini,
         kiro,
         hermes,
+        droid,
     }
 }
 
@@ -190,6 +195,12 @@ where
             request,
             permission_mode,
             crate::hermes_cli::run_agent_stream,
+            emit,
+        ),
+        AiAgentId::Droid => run_shared_agent_stream(
+            request,
+            permission_mode,
+            crate::droid_cli::run_agent_stream,
             emit,
         ),
     }
@@ -320,6 +331,7 @@ mod tests {
             status.gemini.installed,
             status.kiro.installed,
             status.hermes.installed,
+            status.droid.installed,
         ];
 
         assert!(install_flags

@@ -280,6 +280,7 @@ describe('App note windows', () => {
       gemini: { installed: true, version: '0.3.2' },
       kiro: { installed: false, version: null },
       hermes: { installed: false, version: null },
+      droid: { installed: false, version: null },
     }))
     commandResults.get_ai_agents_status = getAiAgentsStatus
 

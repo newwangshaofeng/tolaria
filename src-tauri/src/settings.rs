@@ -12,6 +12,7 @@ const SUPPORTED_DEFAULT_AI_AGENTS: &[&str] = &[
     "gemini",
     "kiro",
     "hermes",
+    "droid",
 ];
 pub const DEFAULT_HIDE_GITIGNORED_FILES: bool = true;
 const SUPPORTED_NOTE_WIDTH_MODES: &[&str] = &["normal", "wide"];
@@ -622,6 +623,15 @@ mod tests {
             ..Default::default()
         });
         assert_eq!(loaded.default_ai_agent.as_deref(), Some("hermes"));
+    }
+
+    #[test]
+    fn test_droid_default_ai_agent_is_preserved() {
+        let loaded = save_and_reload(Settings {
+            default_ai_agent: Some("droid".to_string()),
+            ..Default::default()
+        });
+        assert_eq!(loaded.default_ai_agent.as_deref(), Some("droid"));
     }
 
     #[test]

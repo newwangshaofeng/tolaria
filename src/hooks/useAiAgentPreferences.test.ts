@@ -20,6 +20,7 @@ const aiAgentsStatus = {
   gemini: { status: 'missing' as const, version: null },
   kiro: { status: 'missing' as const, version: null },
   hermes: { status: 'missing' as const, version: null },
+  droid: { status: 'missing' as const, version: null },
 }
 
 describe('useAiAgentPreferences', () => {
@@ -90,6 +91,7 @@ describe('useAiAgentPreferences', () => {
         gemini: { status: 'missing', version: null },
         kiro: { status: 'missing', version: null },
         hermes: { status: 'missing', version: null },
+        droid: { status: 'missing', version: null },
       },
     }))
 

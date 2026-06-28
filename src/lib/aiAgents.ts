@@ -1,4 +1,4 @@
-export type AiAgentId = 'claude_code' | 'codex' | 'opencode' | 'pi' | 'gemini' | 'kiro' | 'hermes'
+export type AiAgentId = 'claude_code' | 'codex' | 'opencode' | 'pi' | 'gemini' | 'kiro' | 'hermes' | 'droid'
 
 export type AiAgentStatus = 'checking' | 'installed' | 'missing'
 export type AiAgentReadiness = 'checking' | 'ready' | 'missing'
@@ -62,6 +62,12 @@ export const AI_AGENT_DEFINITIONS: readonly AiAgentDefinition[] = [
     shortLabel: 'Hermes',
     installUrl: 'https://hermes-agent.nousresearch.com/docs/getting-started/quickstart',
   },
+  {
+    id: 'droid',
+    label: 'Droid',
+    shortLabel: 'Droid',
+    installUrl: 'https://docs.factory.ai',
+  },
 ] as const
 
 export function createAiAgentAvailability(status: AiAgentStatus = 'checking', version: string | null = null): AiAgentAvailability {
@@ -115,6 +121,7 @@ export function normalizeAiAgentsStatus(payload: Partial<Record<AiAgentId, { ins
     gemini: normalizeAvailability(payload?.gemini),
     kiro: normalizeAvailability(payload?.kiro),
     hermes: normalizeAvailability(payload?.hermes),
+    droid: normalizeAvailability(payload?.droid),
   }
 }
 

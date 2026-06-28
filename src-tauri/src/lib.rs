@@ -16,6 +16,9 @@ mod gemini_discovery;
 pub mod git;
 pub mod hermes_cli;
 mod hermes_discovery;
+pub mod droid_cli;
+mod droid_config;
+mod droid_discovery;
 pub mod kiro_cli;
 mod kiro_discovery;
 #[cfg(any(test, all(desktop, target_os = "linux")))]

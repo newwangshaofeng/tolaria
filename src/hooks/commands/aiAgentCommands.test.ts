@@ -14,6 +14,7 @@ describe('buildAiAgentCommands', () => {
         gemini: { status: 'missing', version: null },
         kiro: { status: 'missing', version: null },
         hermes: { status: 'installed', version: 'Hermes Agent 0.16.0' },
+        droid: { status: 'missing', version: null },
       },
       selectedAiAgent: 'claude_code',
       onSetDefaultAiAgent,

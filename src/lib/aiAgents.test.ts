@@ -15,6 +15,7 @@ describe('aiAgents helpers', () => {
     expect(normalizeStoredAiAgent('gemini')).toBe('gemini')
     expect(normalizeStoredAiAgent('kiro')).toBe('kiro')
     expect(normalizeStoredAiAgent('hermes')).toBe('hermes')
+    expect(normalizeStoredAiAgent('droid')).toBe('droid')
     expect(normalizeStoredAiAgent('cursor')).toBeNull()
   })
 
@@ -32,6 +33,7 @@ describe('aiAgents helpers', () => {
       gemini: { installed: true, version: '0.5.1' },
       kiro: { installed: true, version: '0.12.0' },
       hermes: { installed: true, version: 'Hermes Agent 0.16.0' },
+      droid: { installed: true, version: 'droid 1.0.0' },
     })
 
     expect(statuses.claude_code).toEqual({ status: 'installed', version: '1.0.20' })
@@ -41,6 +43,7 @@ describe('aiAgents helpers', () => {
     expect(statuses.gemini).toEqual({ status: 'installed', version: '0.5.1' })
     expect(statuses.kiro).toEqual({ status: 'installed', version: '0.12.0' })
     expect(statuses.hermes).toEqual({ status: 'installed', version: 'Hermes Agent 0.16.0' })
+    expect(statuses.droid).toEqual({ status: 'installed', version: 'droid 1.0.0' })
   })
 
   it('cycles through the supported agents', () => {
@@ -50,6 +53,7 @@ describe('aiAgents helpers', () => {
     expect(getNextAiAgentId('pi')).toBe('gemini')
     expect(getNextAiAgentId('gemini')).toBe('kiro')
     expect(getNextAiAgentId('kiro')).toBe('hermes')
-    expect(getNextAiAgentId('hermes')).toBe('claude_code')
+    expect(getNextAiAgentId('hermes')).toBe('droid')
+    expect(getNextAiAgentId('droid')).toBe('claude_code')
   })
 })
